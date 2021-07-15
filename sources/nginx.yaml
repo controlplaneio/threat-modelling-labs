@@ -17,6 +17,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx
+  labels:
+      bats: privileged-test
 spec:
   containers:
   - name: nginx
