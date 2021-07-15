@@ -7,7 +7,8 @@ DETIK_CLIENT_NAME="kubectl"
 
 setup() {
   # deploy nginx
-  kubectl apply -f priv.yaml
+  echo $PWD
+  kubectl apply -f sources/nginx-priv.yaml
 echo "wait for nginx to be ready..."
   sleep 20
 }
