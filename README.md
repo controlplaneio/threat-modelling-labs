@@ -46,3 +46,4 @@ kubectl delete pods --all
 
 - [KinD](https://kind.sigs.k8s.io/)
   - [KinD Installation](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+  - [Docker image registry - Kindest](https://hub.docker.com/u/kindest)
