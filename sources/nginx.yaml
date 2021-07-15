@@ -1,0 +1,27 @@
+
+# |  _ \ / _ \  | \ | |/ _ \_   _| | | | / ___|| ____| |_ _| \ | |
+# | | | | | | | |  \| | | | || |   | | | \___ \|  _|    | ||  \| |
+# | |_| | |_| | | |\  | |_| || |   | |_| |___) | |___   | || |\  |
+# |____/ \___/  |_| \_|\___/ |_|    \___/|____/|_____| |___|_| \_|
+ 
+# |  _ \|  _ \ / _ \|  _ \| | | |/ ___|_   _|_ _/ _ \| \ | |
+# | |_) | |_) | | | | | | | | | | |     | |  | | | | |  \| |
+# |  __/|  _ <| |_| | |_| | |_| | |___  | |  | | |_| | |\  |
+# |_|   |_| \_\\___/|____/ \___/ \____| |_| |___\___/|_| \_|
+
+# This is a demo of a bad, BAD, container that we don't want to run in production
+# --privileged is the most dangerous flag in computing - Andrew Martin
+# More information here: https://www.youtube.com/watch?v=MP09j2RdgPE
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    securityContext:
+      privileged: true
