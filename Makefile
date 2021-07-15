@@ -19,3 +19,22 @@ psp-enable:
 psp-disable: 
 	docker exec -it threat-modelling-build-control-plane \
 	sed -i "s#enable-admission-plugins=NodeRestriction,PodSecurityPolicy#enable-admission-plugins=NodeRestriction#g" /etc/kubernetes/manifests/kube-apiserver.yaml
+
+.PHONY: bats-detik-debug
+bats-detik-debug:
+	docker run -it \
+		-v ${PWD}:/home/testing/sources \
+		-v ${PWD}/config:/home/testing/.kube/config \
+		--network="host" \
+		denhamparry/bats-detik:0.0.1 \
+		/bin/bash
+
+
+.PHONY: bats-detik
+bats-detik:
+	docker run -it \
+		-v ${PWD}:/home/testing/sources \
+		-v ${PWD}/config:/home/testing/.kube/config \
+		--network="host" \
+		denhamparry/bats-detik:0.0.1 \
+		bats /home/testing/sources/priv-test.bats
