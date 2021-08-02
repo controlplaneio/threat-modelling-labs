@@ -1,1 +1,3 @@
-config
+.kube/
+lab4/config
+
