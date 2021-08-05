@@ -11,7 +11,7 @@ setup() {
 }
 
 @test "verify that privileged containers cannot be run in cluster" {
-  run kubectl apply -f sources/nginx.yaml
+  run kubectl apply -f source/nginx.yaml
 	[ "$status" -gt 0 ]
 }
 

@@ -29,7 +29,7 @@ psp-disable:
 .PHONY: bats-detik-debug
 bats-detik-debug:
 	docker run -it \
-		-v ${PWD}:/home/testing/sources \
+		-v ${PWD}:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
 		--network="host" \
 		denhamparry/bats-detik:0.0.1 \
@@ -38,8 +38,8 @@ bats-detik-debug:
 .PHONY: bats-detik
 bats-detik:
 	docker run -it \
-		-v ${PWD}/sources:/home/testing/sources \
+		-v ${PWD}/source:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
 		--network="host" \
 		denhamparry/bats-detik:0.0.1 \
-		bats /home/testing/sources/psp-privileged-test.bats
+		bats /home/testing/source/psp-privileged-test.bats
