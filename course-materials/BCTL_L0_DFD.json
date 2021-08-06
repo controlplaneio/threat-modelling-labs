@@ -1,0 +1,722 @@
+{
+  "summary": {
+    "title": "Boats, Cranes & Trains Logistics"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "Level 0 DFD",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0,
+        "diagramJson": {
+          "cells": [
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 108,
+                "y": 13
+              },
+              "angle": 0,
+              "id": "1267dd55-534f-4ef9-8e6b-ec414e0394bb",
+              "z": 1,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Laser Cool Inc"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 448,
+                "y": 3
+              },
+              "angle": 0,
+              "id": "b69942ed-bc6f-4861-8ded-fa2443cfa118",
+              "z": 2,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "title": "Impersonation of valid customer",
+                  "description": "If authentication is not properly implemented on BCTL's public-facing site, Hashjack may be able to impersonate an existing customer",
+                  "mitigation": "- Strong authentication"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Denial of service",
+                  "title": "DoS attack on public facing services"
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "BCTL booking\nsite"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "1267dd55-534f-4ef9-8e6b-ec414e0394bb"
+              },
+              "target": {
+                "id": "b69942ed-bc6f-4861-8ded-fa2443cfa118"
+              },
+              "vertices": [],
+              "id": "90af0cb9-ba83-4d0b-8c87-92dfb1b29d00",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Shipment details",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 3,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "title": "Interception of freight booking info",
+                  "description": "If Hashjack can compromise the confidentiality of booking information in transit, he may be able to target shipments of interest at an appropriate port.",
+                  "mitigation": "- Encryption of data in transit"
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 418,
+                "y": 225
+              },
+              "angle": 0,
+              "id": "527aa294-9a79-4545-8b75-0f2600e0a5f6",
+              "z": 4,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "title": "Sensitive PII leaked"
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Persistent storage"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "b69942ed-bc6f-4861-8ded-fa2443cfa118"
+              },
+              "target": {
+                "id": "527aa294-9a79-4545-8b75-0f2600e0a5f6"
+              },
+              "vertices": [],
+              "id": "998bd33a-5119-4cb1-85d7-37b15f16e1d0",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Shipment details",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 5,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 787,
+                "y": 212
+              },
+              "angle": 0,
+              "id": "00395b3e-3c48-4ff0-83ea-06147b925d29",
+              "z": 6,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Compliance\nservice"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "527aa294-9a79-4545-8b75-0f2600e0a5f6"
+              },
+              "target": {
+                "id": "00395b3e-3c48-4ff0-83ea-06147b925d29"
+              },
+              "vertices": [],
+              "id": "ddf3f0fc-3b09-4142-b656-5895861aab3b",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Compliance info",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 7,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 755,
+                "y": 2
+              },
+              "angle": 0,
+              "id": "f9cf31bc-6505-4b71-bf0a-59ed6b203d66",
+              "z": 8,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Government compliance\nstaff"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "00395b3e-3c48-4ff0-83ea-06147b925d29"
+              },
+              "target": {
+                "id": "f9cf31bc-6505-4b71-bf0a-59ed6b203d66"
+              },
+              "vertices": [],
+              "id": "adf0d480-2d12-4a49-8251-82468a0d7f0e",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Compliance info",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 9,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 385,
+                "y": 340
+              },
+              "target": {
+                "x": 386,
+                "y": 339
+              },
+              "vertices": [
+                {
+                  "x": 410,
+                  "y": 208
+                },
+                {
+                  "x": 592,
+                  "y": 211
+                },
+                {
+                  "x": 585,
+                  "y": 329
+                },
+                {
+                  "x": 461,
+                  "y": 358
+                }
+              ],
+              "id": "d7a7e56c-8140-4108-8062-58e4f825fe91",
+              "z": 10,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 291,
+                "y": 3
+              },
+              "target": {
+                "x": 290,
+                "y": 98
+              },
+              "vertices": [],
+              "id": "92d60ab0-b1bd-40a4-80c4-a2d419360834",
+              "z": 11,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 675,
+                "y": 118
+              },
+              "target": {
+                "x": 1006,
+                "y": 117
+              },
+              "vertices": [],
+              "id": "4425ebf6-ecb4-4b5e-bfb5-94acd6cd8c26",
+              "z": 12,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 650,
+                "y": 418
+              },
+              "angle": 0,
+              "id": "bb055ffe-6658-4e29-bcf6-3154f3d63dfe",
+              "z": 13,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "title": "Compromised integrity of reporting info",
+                  "description": "If Hashjack can compromise the integrity of the reporting service, they may be able to cover their tracks by reporting that a hijacked shipment is still on course.",
+                  "mitigation": "- Protective Monitoring\n- Container IDS\n- Automated pipeline security testing\n- etc."
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "title": "Sensitive cargo location information disclosed",
+                  "description": "If the real-time location of cargo of interest to Hashjack were to be discovered, this could help Hashjack plan a hijack!",
+                  "mitigation": "- Encryption of data in transit\n- Pod level authentication"
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Tracking\nservice"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 288,
+                "y": 475
+              },
+              "angle": 0,
+              "id": "070a3e4a-a306-45a9-9b52-fcd4f5bd9735",
+              "z": 14,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Elevation of privilege",
+                  "title": "Lateral movement within cluster",
+                  "description": "If Hashjack can elevate their privilege using any service running within the cluster, they may be able to move from pod to pod and discover even more sensitive information. The reporting service may provide a suitable target if it permits the two-way exchange of information with partner organisations. Hashjack is a well-resourced threat actor and may have infiltrated these organisations!",
+                  "mitigation": "- Principle of least privilege\n- Well-designed RBAC\n- Patching policy\n- Automated pipeline security testing"
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Reporting\nservice"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 906,
+                "y": 419
+              },
+              "angle": 0,
+              "id": "416968b7-3492-4a27-bffa-da83f30d634d",
+              "z": 15,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "GPS tracked\ngoods"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "416968b7-3492-4a27-bffa-da83f30d634d"
+              },
+              "target": {
+                "id": "bb055ffe-6658-4e29-bcf6-3154f3d63dfe"
+              },
+              "vertices": [],
+              "id": "2979fd40-1323-4134-840c-1acab4c6d8a8",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Location info",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 16,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "bb055ffe-6658-4e29-bcf6-3154f3d63dfe"
+              },
+              "target": {
+                "id": "527aa294-9a79-4545-8b75-0f2600e0a5f6"
+              },
+              "vertices": [],
+              "id": "d0c6c434-bb37-4a01-9008-1a090a97a0ac",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Cargo location",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 17,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 948,
+                "y": 373
+              },
+              "target": {
+                "x": 816,
+                "y": 553
+              },
+              "vertices": [],
+              "id": "c4ef54d3-c5e4-4eb7-ba12-898ad787f610",
+              "z": 18,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "527aa294-9a79-4545-8b75-0f2600e0a5f6"
+              },
+              "target": {
+                "id": "070a3e4a-a306-45a9-9b52-fcd4f5bd9735"
+              },
+              "vertices": [],
+              "id": "10439553-b1f0-46f3-90d3-2a0abedd12d7",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Real-time reporting\ndata",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 20,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 59,
+                "y": 306
+              },
+              "angle": 0,
+              "id": "5b64de12-79c5-40e6-92dc-8d931a637fca",
+              "z": 21,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Partner orgs"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "070a3e4a-a306-45a9-9b52-fcd4f5bd9735"
+              },
+              "target": {
+                "id": "5b64de12-79c5-40e6-92dc-8d931a637fca"
+              },
+              "vertices": [],
+              "id": "307e442f-d478-4ef6-9548-222aca279401",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Logistics info",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 22,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 325,
+                "y": 442
+              },
+              "target": {
+                "x": 150,
+                "y": 536
+              },
+              "vertices": [],
+              "id": "f0eaa385-79db-496f-ad05-b4f2e36abe5f",
+              "z": 24,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "070a3e4a-a306-45a9-9b52-fcd4f5bd9735"
+              },
+              "target": {
+                "id": "1267dd55-534f-4ef9-8e6b-ec414e0394bb"
+              },
+              "vertices": [],
+              "id": "0edff2ba-fdc8-47f1-9e4a-a16bba4f4a92",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Reporting info",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 25,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            }
+          ]
+        },
+        "size": {
+          "height": 592,
+          "width": 1187
+        }
+      }
+    ]
+  }
+}
