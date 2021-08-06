@@ -1,0 +1,81 @@
+digraph {
+	// Base Styling
+	rankdir="TB";
+	splines=true;
+	overlap=false;
+	nodesep="0.2";
+	ranksep="0.4";
+	// label="Some Title";
+	labelloc="t";
+	fontname="Montserrat";
+	node [ fontname="Montserrat" margin=0.28 shape="plaintext" style="filled, rounded" ]
+	edge [ fontname="Montserrat" color="#2B303A" ]
+	d [shape=none, label="", image="hashjack.png"];
+
+	// List of Nodes
+
+	// base nodes
+	// reality [ label="Reality" fillcolor="#2B303A" fontcolor="#ffffff" ]
+	// attack_win [ label="Access video\nrecordings in\nS3 bucket\n(attackers win)" fillcolor="#DB2955" fontcolor="#ffffff" ]
+
+	// green nodes == OR nodes
+	node [ color="#D6E9D5" ]
+	leak_sensitive_document [ label="Leak sensitive \ndocument" ]
+	entry_to_building [ label="Entry to \nbuilding" ]
+	compromised_delivery_person [ label="Compromised delivery person" ]
+	
+	
+
+	// blue nodes == AND nodes
+	node [ color="#84BCE6" ]
+	steal_from_locker [ label="Steal from \nlocker" ]
+
+
+	// white nodes == single nodes
+	node [ color="#DDDDDD" ]
+	steal_building_pass [ label="Steal building pass \nor key" ]
+	bribe_security_guard [ label="Bribe security \nguard" ]
+	key_to_locker [ label="Obtain key to \nlocker" ]
+	bribe_delivery_person [ label="Bribe delivery \nperson" ]
+	impersonate_delivery_person [ label="Impersonate delivery \nperson" ]
+	steal_document_in_transit [ label="Steal document \nin transit" ]
+	observe_during_entry_check [ label="Guard observes document \nduring entry checks" ]
+	
+
+	// List of Edges
+	leak_sensitive_document -> steal_from_locker
+	steal_from_locker -> entry_to_building
+	steal_from_locker -> key_to_locker -> d
+	entry_to_building -> steal_building_pass -> d
+	entry_to_building -> bribe_security_guard -> d
+
+	leak_sensitive_document -> compromised_delivery_person
+	compromised_delivery_person -> bribe_delivery_person -> d
+	compromised_delivery_person -> impersonate_delivery_person -> d
+
+	leak_sensitive_document -> steal_document_in_transit -> d
+
+	leak_sensitive_document -> observe_during_entry_check -> bribe_security_guard
+
+
+
+
+
+	// Subgraphs / Clusters
+
+	// these clusters enforce the correct hierarchies
+  
+	subgraph same_level_a {
+		rank=same;
+		compromised_delivery_person
+		steal_from_locker
+		steal_document_in_transit
+		observe_during_entry_check
+	}
+	
+
+
+  // Enforcing ordering in levels
+  
+	compromised_delivery_person -> steal_from_locker -> observe_during_entry_check -> steal_document_in_transit [ style="invis" ]
+}

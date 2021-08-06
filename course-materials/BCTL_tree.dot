@@ -1,0 +1,154 @@
+digraph {
+	// Base Styling
+	rankdir="TB";
+	splines=true;
+	overlap=false;
+	nodesep="0.2";
+	ranksep="0.4";
+	// label="Some Title";
+	labelloc="t";
+	fontname="Montserrat";
+	node [ fontname="Montserrat" margin=0.28 shape="plaintext" style="filled, rounded" ]
+	edge [ fontname="Montserrat" color="#2B303A" ]
+	d [shape=none, label="", image="hashjack.png"];
+
+	// List of Nodes
+
+	// base nodes
+	// reality [ label="Reality" fillcolor="#2B303A" fontcolor="#ffffff" ]
+	// attack_win [ label="Access video\nrecordings in\nS3 bucket\n(attackers win)" fillcolor="#DB2955" fontcolor="#ffffff" ]
+
+	// green nodes
+	node [ color="#D6E9D5" ]
+	access_sensitive_data [ label="Access sensitive \ndata" ]
+	access_container [ label="Gain access to \ncontainer" ]
+	vuln_code_in_container [ label="Malicious/vulnerable code \nin deployed container" ]
+	external_route [ label="External route available \nto attacker-controlled service" ]
+	exec_call [ label="Make exec call \nto container" ]
+	vuln_image [ label="Vulnerable container \nimage" ]
+	tamper_with_image [ label="Tamper with image \nin Artifact repo" ]
+	vuln_app_code [ label="Vulnerable application \ncode" ]
+	aws_api_call [ label="Data returned from \nAWS API call" ]
+	
+	
+
+	// blue nodes
+	node [ color="#84BCE6" ]
+	mount_host_disk [ label="Mount host \ndisk" ]
+	eavesdrop_on_host [ label="Eavesdrop on host \nnetwork" ]
+	eavesdrop_in_pod [ label="Eavesdrop on traffic \nwithin a pod" ]
+	exfiltrate_data [ label="Malicious workload \nexfiltrates data" ]
+	rce_in_container [ label="RCE within \ncontainer" ]
+	shell_access [ label="Gain shell in \nrunning container" ]
+
+
+	// white nodes
+	node [ color="#DDDDDD" ]
+	legit_container [ label="Use container with \nlegitimate access" ]
+	hostnetwork [ label="Pod launched with \nHostnetwork" ]
+	cap_net_admin [label="Pod launched with \nCAP_NET_ADMIN" ]
+	priv_container [label="Find privileged \ncontainer" ]
+	poor_code [ label="Poor coding \npractices" ]
+	vuln_dependency [ label="Referenced dependency \nhas vulnerability" ]
+	dns_tunnel [ label="Exfiltrate via \nDNS tunneling" ]
+	internet_gateway_exfiltrate [ label="Exfiltrate via \ninternet gateway" ]
+	priv_endpoint_exfiltrate [ label="Exfiltrate via AWS Private Endpoint \nto attacker-controlled AWS service" ]
+	IAM_misconfig [ label="IAM misconfiguration \nallows unauthorised access" ]
+	plain_text_creds [ label="Plain text credentials \nin source control" ]
+	ec2_instance_metadata [ label="Compromised pod \nretrieves creds from \nEC2 metadata API" ]
+	k8s_api_network_access [ label="K8s API \nnetwork access" ]
+	workload_with_shell [ label="Workload with \nshell" ]
+	typosquat [ label="Dependency confusion or \ntyposquatting attack" ]
+	exploitable_vuln [ label="Exploitable vulnerability \nin container" ]
+	exposed_container [ label="Container exposed \nto network" ]
+	obtain_kubeconfig [ label="Obtain kubeconfig \nfile" ]
+	long_lived_SA_token [ label="Long-lived service \naccount token is \ncompromised" ]
+	targetted_supply_chain [label="Targetted attack \nvia public image" ]
+	dev_creds [ label="Obtain developer \ncredentials" ]
+	artifact_repo_storage [ label="Access to artifact \nrepo storage disk" ]
+	commit_malicious_code [ label="Commit malicious \ncode" ]
+
+
+
+	// List of Edges
+	
+	access_sensitive_data -> legit_container -> access_container
+
+	access_container -> rce_in_container
+	rce_in_container -> exploitable_vuln
+	rce_in_container -> exposed_container -> d
+	access_container -> shell_access
+	shell_access -> exec_call
+	exec_call -> long_lived_SA_token -> d
+	exec_call -> obtain_kubeconfig -> d
+	shell_access -> k8s_api_network_access
+	shell_access -> workload_with_shell
+  
+	access_sensitive_data -> mount_host_disk -> priv_container
+	mount_host_disk -> access_container
+  
+	access_sensitive_data -> eavesdrop_on_host -> hostnetwork
+	eavesdrop_on_host -> access_container
+  
+	access_sensitive_data -> eavesdrop_in_pod -> cap_net_admin
+	eavesdrop_in_pod -> access_container
+
+	access_sensitive_data -> exfiltrate_data
+	exfiltrate_data -> vuln_code_in_container
+	vuln_code_in_container -> vuln_image
+	vuln_image -> targetted_supply_chain -> d
+	vuln_image -> typosquat -> d
+	vuln_image -> tamper_with_image -> artifact_repo_storage
+	tamper_with_image -> dev_creds
+	vuln_code_in_container -> vuln_app_code -> commit_malicious_code -> dev_creds
+	vuln_app_code -> poor_code
+	vuln_app_code -> vuln_dependency
+
+	dev_creds -> d
+
+	exfiltrate_data -> external_route -> internet_gateway_exfiltrate
+	external_route -> dns_tunnel
+	external_route -> priv_endpoint_exfiltrate
+  
+	aws_api_call -> ec2_instance_metadata
+	access_sensitive_data -> aws_api_call -> IAM_misconfig -> d
+	aws_api_call -> plain_text_creds -> dev_creds
+
+
+
+
+	// Subgraphs / Clusters
+
+	// these clusters enforce the correct hierarchies
+  
+	subgraph same_level_a {
+		rank=same;
+		legit_container
+		mount_host_disk
+		eavesdrop_on_host
+		eavesdrop_in_pod
+		aws_api_call
+		exfiltrate_data
+	}
+
+	subgraph same_level_b {
+		rank=same;
+		access_container
+		priv_container
+		hostnetwork
+		cap_net_admin
+	}
+
+	subgraph same_level_c {
+		rank=same;
+		exposed_container
+		exploitable_vuln
+	}
+	
+
+
+  // Enforcing ordering in levels
+  
+	legit_container -> mount_host_disk -> eavesdrop_on_host -> eavesdrop_in_pod -> exfiltrate_data -> aws_api_call [ style="invis" ]
+	access_container -> priv_container -> hostnetwork -> cap_net_admin [ style="invis" ]
+}
