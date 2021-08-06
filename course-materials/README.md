@@ -6,7 +6,7 @@
 
 ### BCTL Data Flow Diagram (DFD)
 
-- An OWASP Threat Dragon json file is provided for the BCTL Level 0 Data Flow Diagram (DFD) presented in module 1: [DFD] (BCTL_L0_DFD.json)
+- An OWASP Threat Dragon json file is provided for the BCTL Level 0 Data Flow Diagram (DFD) presented in module 1: [DFD](BCTL_L0_DFD.json)
 
 - The following link provides instructions which may be used by students to run local, containerised instances of OWASP Threat Dragon and GitLab (for storage of models) using Docker Compose: https://hub.docker.com/r/appsecco/owasp-threat-dragon-gitlab
 
@@ -14,7 +14,7 @@
 
 ### Building an example Graphviz attack tree
 
-- The source file for the example Graphviz attack tree used in Module 1 can be found at: [Example attack tree] (example_tree.dot)
+- The source file for the example Graphviz attack tree used in Module 1 can be found at: [Example attack tree](example_tree.dot)
 
 - We have provided a Dockerfile that can be used to generate `.png` files from Graphviz `.dot` files: [Dockerfile](Dockerfile)
 
