@@ -2,25 +2,19 @@
 
 - [Back to Threat Modelling Labs](../README.md)
 
-## ToDo
-
-- Upload PDF versions of worksheets
-- Create markdown WORKSHEET for labs
-  - Update all sections for answers
-- Update Google sheets template
-
 ## Setup
-
-### Broswer
-
-Use the [work sheet](WORKSHEET.md) to follow along with the lab exercise.
 
 ### Print
 
-Print this [PDF]() to follow along with the lab exercise. 
+Print the [Matrix PDF](lab1-matrix.pdf) and [Martix allowed values PDF](lab1-matrix-allowed-values.pdf) to follow along with the lab exercise and this  
+
+### Broswer
+
+Use the [Matrix Worksheet](WORKSHEET.md) to follow along with the lab exercise.
 
 ### Google Sheets
 
-- [Use Google Sheets](https://docs.google.com/spreadsheets/d/1oGncd2yChHNYVhLO9KiHbXxEIEE75W4WK7WZp_Gyh7I/edit?usp=sharing)
-  - Click `File` > `Make a copy`
+- [Use Google Sheets](https://docs.google.com/spreadsheets/d/1V3HvoqMOK763asDTPZYpT1wn-f0zZ18CjYf15GTKrqA/edit?usp=sharing)
+  - Create a copy in your Google Drive account by clicking `File` > `Make a copy`
   - Update missing cells on your Google Sheet
+
