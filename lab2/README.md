@@ -1,10 +1,11 @@
-# Lab 2
+# Lab 2 - STRIDE
 
-- [Back to Threat Modelling Labs](../README.md)
+- [Back to Threat Modelling Labs](/README.md)
 
 ## Setup
 
 This lab can be completed in one of the following two ways:
+
 - [Pen and Paper](#pen-and-paper)
 - [Google Sheets](#google-sheets)
 
@@ -18,3 +19,7 @@ This lab can be completed in one of the following two ways:
 - [Use Google Sheets](https://docs.google.com/spreadsheets/d/1OFVIzIs3MYcwg_b0qhO869rTal2-rqsdbMuemlW7_nM/edit?usp=sharing)
   - Create a copy in your Google Drive account by clicking `File` > `Make a copy`
   - STRIDE on your Google Sheet
+
+## Resources
+
+- [Course Materials](/course-materials#module-2)
