@@ -1,6 +1,6 @@
-# Threat Modelling Kubernetes - Course Materials
+# Course Materials
 
-> Contents for the Threat Modelling workshop delivered by [Control Plane](https://control-plane.io) 
+- [Back to Threat Modelling Labs](/README.md)
 
 ## Module 1
 
