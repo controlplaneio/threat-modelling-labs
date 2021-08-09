@@ -1,6 +1,6 @@
-# Lab 3
+# Lab 3 - Prioritising Controls
 
-- [Back to Threat Modelling Labs](../README.md)
+- [Back to Threat Modelling Labs](/README.md)
 
 ## Setup
 

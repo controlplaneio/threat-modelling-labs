@@ -1,10 +1,11 @@
-# Lab 1
+# Lab 1 - Connectivity Matrix
 
-- [Back to Threat Modelling Labs](../README.md)
+- [Back to Threat Modelling Labs](/README.md)
 
 ## Setup
 
 This lab can be completed in one of the following three ways:
+
 - [Print](#print)
 - [Browser](#browser)
 - [Google Sheets](#google-sheets)
@@ -23,3 +24,6 @@ Use the [Matrix Worksheet](WORKSHEET.md) to follow along with the lab exercise.
   - Create a copy in your Google Drive account by clicking `File` > `Make a copy`
   - Update missing cells on your Google Sheet
 
+## Resources
+
+- [Course Materials](/course-materials#module-1)
