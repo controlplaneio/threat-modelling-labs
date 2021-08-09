@@ -1,9 +1,3 @@
-.PHONY: install-kind
-install-kind:
-	curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
-	chmod +x ./kind
-	sudo mv ./kind /usr/bin/kind
-
 .PHONY: delete
 delete:
 	kind delete cluster --name threat-modelling
@@ -26,20 +20,19 @@ psp-disable:
 	docker exec -it threat-modelling-control-plane \
 	sed -i "s#enable-admission-plugins=NodeRestriction,PodSecurityPolicy#enable-admission-plugins=NodeRestriction#g" /etc/kubernetes/manifests/kube-apiserver.yaml
 
-.PHONY: bats-detik-debug
-bats-detik-debug:
-	docker run -it \
-		-v ${PWD}:/home/testing/source \
-		-v ${PWD}/config:/home/testing/.kube/config \
-		--network="host" \
-		denhamparry/bats-detik:0.0.1 \
-		/bin/bash
+.PHONY: bats-detik-build
+bats-detik-build:
+	rm -rf /tmp/bats-detik
+	git clone https://github.com/bats-core/bats-detik.git /tmp/bats-detik
+	(cd /tmp/bats-detik && git checkout e3ea96e14bfd8d2637fc827c1d801f4c576d2cfc)
+	(cd /tmp/bats-detik && docker build -t bats-detik .)
+	rm -rf /tmp/bats-detik
 
 .PHONY: bats-detik
-bats-detik:
+bats-detik: bats-detik-build
 	docker run -it \
 		-v ${PWD}/source:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
 		--network="host" \
-		denhamparry/bats-detik:0.0.1 \
+		bats-detik \
 		bats /home/testing/source/psp-privileged-test.bats

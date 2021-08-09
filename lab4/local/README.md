@@ -1,27 +1,22 @@
 # Lab 4 - Testing Kubernetes
 
-> Contents for the Threat Modelling workshop delivered by [Control Plane](https://control-plane.io) 
+- [Back to Threat Modelling Lab 4](/lab4/README.md)
 
-## Setup
+> Contents for the Threat Modelling workshop delivered by [Control Plane](https://control-plane.io).
 
-### Install
+This is a local example of the Katacoda lab.
 
-```bash
-make install
-```
+## Prerequisite
 
-### KinD
+> The following demo is built for Linux (Tested on Debian)
 
-```bash
-kind create cluster --config kind-cluster-build.yaml
-kind get clusters
-kind get nodes --name threat-modelling
-kind get kubeconfig --name threat-modelling > threat-modelling-config.yaml
-```
+- [Make](https://www.gnu.org/software/make/manual/make.html)
+- [Docker](https://www.docker.com)
+- [KinD](https://kind.sigs.k8s.io/docs/user/quick-start/)
 
 ## Demo
 
-### Demo 1 - run privileged pod with test
+### Demo 1 - Run privileged pod with test
 
 ```bash
 make create
@@ -33,9 +28,16 @@ make bats-detik
 
 ```bash
 make psp-enable
-kubectl apply -f psp-r.yaml
-kubectl apply -f nginx-priv.yaml
+sleep 60
+kubectl apply -f source/psp-restrictive.yaml
+kubectl apply -f source/nginx.yaml
 make bats-detik
+```
+
+### Teardown
+
+```bash
+make delete
 ```
 
 ## References
