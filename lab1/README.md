@@ -4,11 +4,16 @@
 
 ## Setup
 
+This lab can be completed in one of the following three ways:
+- [Print](#print)
+- [Browser](#browser)
+- [Google Sheets](#google-sheets)
+
 ### Print
 
-Print the [Matrix PDF](lab1-matrix.pdf) and [Martix allowed values PDF](lab1-matrix-allowed-values.pdf) to follow along with the lab exercise and this  
+Print the [Matrix PDF](lab1-matrix.pdf) and [Martix allowed values PDF](lab1-matrix-allowed-values.pdf) to follow along with the lab exercise.
 
-### Broswer
+### Browser
 
 Use the [Matrix Worksheet](WORKSHEET.md) to follow along with the lab exercise.
 
