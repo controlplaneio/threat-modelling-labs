@@ -25,5 +25,6 @@ Use the [Matrix Worksheet](WORKSHEET.md) to follow along with the lab exercise.
   - Update missing cells on your Google Sheet
 
 ## Resources
-- [Lab 1 completed matrix](https://docs.google.com/spreadsheets/d/13Koss8WzxFAhJeqiMTJOy0KG8_TGtSiy7w5C27XjccM/edit?usp=sharing)
+- [Lab 1 completed Google Sheet](https://docs.google.com/spreadsheets/d/13Koss8WzxFAhJeqiMTJOy0KG8_TGtSiy7w5C27XjccM/edit?usp=sharing)
+- [Lab 1 completed PDF](lab1-answers.pdf)
 - [Course Materials](/course-materials#module-1)
