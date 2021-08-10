@@ -8,19 +8,19 @@
 
 This lab can be completed in one of the following two ways:
 
-- [Pen and Paper](#pen-and-paper)
 - [Google Jamboard](#google-jamboard)
-
-### Pen and Paper
-
-- Print or copy the Prioritising Controls Background [PDF](lab3-prioritising-controls-background.pdf) or [PNG](lab3-prioritising-controls-background.png)
-- Place the [controls](#controls) below in the quadrant that you believe is most appropriate for BCTL.  
+- [Pen and Paper](#pen-and-paper)
 
 ### Google Jamboard
 
 - [Use Google Jamboard](https://jamboard.google.com/d/1_BEU9UWtCvZNtwl0eVOmUXnNW8UizsDnl19Lu0Ckvic/edit?usp=sharing)
   - Create a copy in your Google Drive account by clicking the 3 vertical dots on the top right corner of the screen > `Make a copy`
   - Move the post-it notes on your Google Jamboard
+
+### Pen and Paper
+
+- Print or copy the Prioritising Controls Background [PDF](lab3-prioritising-controls-background.pdf) or [PNG](lab3-prioritising-controls-background.png)
+- Place the [controls](#controls) below in the quadrant that you believe is most appropriate for BCTL.  
 
 ## Controls
 
