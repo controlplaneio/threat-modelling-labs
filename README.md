@@ -14,7 +14,7 @@
 
 - [Exercise](lab3/README.md)
 
-## Lab 4
+## Lab 4 - Testing Kubernetes
 
 - [Exercise](lab4/README.md)
 
