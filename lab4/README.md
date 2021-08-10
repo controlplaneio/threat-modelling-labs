@@ -8,19 +8,16 @@
 
 This lab can be completed in one of the following two ways:
 
-- [Lab 4 - Testing Kubernetes](#lab-4---testing-kubernetes)
-  - [Setup](#setup)
-    - [Katacoda](#katacoda)
-    - [Local](#local)
-  - [Resources](#resources)
+- [Katacoda](#katacoda) (free and automated online)
+- [Local](#local) (local configuration required)
 
 ### Katacoda
 
-- [Katacoda](https://katacoda.com/denhamparry/courses/kubernetespsp)
+- Navigate to [Katacoda](https://katacoda.com/denhamparry/courses/kubernetespsp) and follow the on-screen instructions
 
 ### Local
 
-- [Local](local/README.md)
+- Follow these instuctions for [local](local/README.md) setup
 
 ## Resources
 
