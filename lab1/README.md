@@ -6,23 +6,24 @@
 
 This lab can be completed in one of the following three ways:
 
-- [Print](#print)
-- [Browser](#browser)
-- [Google Sheets](#google-sheets)
+- [Google Sheets](#google-sheets) (Google account required)
+- [PDF](#pdf) (printer required)
+- [Browser](#browser) (least interactive approach)
 
-### Print
-
-Print the [Matrix PDF](lab1-matrix.pdf) and [Martix allowed values PDF](lab1-matrix-allowed-values.pdf) to follow along with the lab exercise.
-
-### Browser
-
-Use the [Matrix Worksheet](WORKSHEET.md) to follow along with the lab exercise.
 
 ### Google Sheets
 
 - [Use Google Sheets](https://docs.google.com/spreadsheets/d/1V3HvoqMOK763asDTPZYpT1wn-f0zZ18CjYf15GTKrqA/edit?usp=sharing)
   - Create a copy in your Google Drive account by clicking `File` > `Make a copy`
   - Update missing cells on your Google Sheet
+
+### PDF
+
+Print the [Matrix PDF](lab1-matrix.pdf) and [Matrix allowed values PDF](lab1-matrix-allowed-values.pdf) to follow along with the lab exercise.
+
+### Browser
+
+Use the [Matrix Worksheet](WORKSHEET.md) to follow along with the lab exercise.
 
 ## Resources
 - [Lab 1 completed Google Sheet](https://docs.google.com/spreadsheets/d/13Koss8WzxFAhJeqiMTJOy0KG8_TGtSiy7w5C27XjccM/edit?usp=sharing)
