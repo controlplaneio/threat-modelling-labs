@@ -14,8 +14,8 @@ This lab can be completed in one of the following two ways:
 ### Google Jamboard
 
 - [Use Google Jamboard](https://jamboard.google.com/d/1_BEU9UWtCvZNtwl0eVOmUXnNW8UizsDnl19Lu0Ckvic/edit?usp=sharing)
-  - Create a copy in your Google Drive account by clicking the 3 vertical dots on the top right corner of the screen > `Make a copy`
-  - Move the post-it notes on your Google Jamboard
+- Create a copy in your Google Drive account by clicking the 3 vertical dots on the top right corner of the screen > `Make a copy`
+- Move the post-it notes on your Google Jamboard
 
 ### Pen and Paper
 
@@ -24,7 +24,7 @@ This lab can be completed in one of the following two ways:
 
 ## Controls
 
-Here are a list of the controls that we're reviewing in this lab:
+Here is a list of the controls that we're reviewing in this lab, which are also in the Jamboard above:
 
 ### C1 - Admission Control
 
