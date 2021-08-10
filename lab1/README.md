@@ -4,7 +4,9 @@
 
 ## Setup
 
-This lab can be completed in one of the following three ways:
+This lab can be completed in one of the following three ways. 
+
+> We recommend [Google Sheets](#google-sheets) as you can use it as a base for future work
 
 - [Google Sheets](#google-sheets) (Google account required)
 - [PDF](#pdf) (printer required)
@@ -13,17 +15,19 @@ This lab can be completed in one of the following three ways:
 
 ### Google Sheets
 
-- [Use Google Sheets](https://docs.google.com/spreadsheets/d/1V3HvoqMOK763asDTPZYpT1wn-f0zZ18CjYf15GTKrqA/edit?usp=sharing)
-  - Create a copy in your Google Drive account by clicking `File` > `Make a copy`
-  - Update missing cells on your Google Sheet
+- Click to view the [Google Sheet](https://docs.google.com/spreadsheets/d/1V3HvoqMOK763asDTPZYpT1wn-f0zZ18CjYf15GTKrqA/edit?usp=sharing)
+- Create a copy in your Google Drive account by clicking `File` > `Make a copy`
+- Update missing cells on your cloned Sheet
 
 ### PDF
 
-Print the [Matrix PDF](lab1-matrix.pdf) and [Matrix allowed values PDF](lab1-matrix-allowed-values.pdf) to follow along with the lab exercise.
+- Print the [Matrix PDF](lab1-matrix.pdf)
+- Write the values into the PDF from the [Matrix allowed values PDF](lab1-matrix-allowed-values.pdf)
 
 ### Browser
 
-Use the [Matrix Worksheet](WORKSHEET.md) to follow along with the lab exercise.
+- Open the [Matrix Worksheet](WORKSHEET.md) 
+- Click through the links 
 
 ## Resources
 - [Lab 1 completed Google Sheet](https://docs.google.com/spreadsheets/d/13Koss8WzxFAhJeqiMTJOy0KG8_TGtSiy7w5C27XjccM/edit?usp=sharing)
