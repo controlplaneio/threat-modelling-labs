@@ -16,7 +16,7 @@ This lab can be completed in one of the following two ways:
 
 ### Katacoda
 
-- [Katacoda](https://katacoda.com/sublimino/courses/kubernetespsp)
+- [Katacoda](https://katacoda.com/denhamparry/courses/kubernetespsp)
 
 ### Local
 
