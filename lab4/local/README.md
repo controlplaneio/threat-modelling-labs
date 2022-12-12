@@ -4,7 +4,7 @@
 
 > Contents for the Threat Modelling workshop delivered by [Control Plane](https://control-plane.io).
 
-This is a local example of the Katacoda lab.
+This lab can be run locally using the following inscructions. 
 
 ## Prerequisite
 
@@ -18,21 +18,31 @@ This is a local example of the Katacoda lab.
 
 ### Demo 1 - Run privileged pod with test
 
+Create a kind cluster and run a test which passes if a privileged pod cannot be deployed on the cluster. 
+
 ```bash
 make create
-kubectl apply -f source/nginx.yaml
 make bats-detik
 ```
 
-### Demo 2 - Enable psp and fail to run privileged pod with test
+Observe that the test fails, as it is possible to deploy the privileged pod. 
+
+### Demo 2 - Install Gatekeeper and enforce admission control policy
+
+Deploy Gatekeeper to the cluster, and create a Gatekeeper Constraint and Constraint Template to prevent privileged pods from being admitted to the cluster. 
 
 ```bash
-make psp-enable
+make install-gatekeeper
 sleep 60
-kubectl apply -f source/psp-restrictive.yaml
-kubectl apply -f source/nginx.yaml
+make deploy-constraint
+```
+
+Run the test again:
+```bash
 make bats-detik
 ```
+
+Observe that the test now passes. 
 
 ### Teardown
 
@@ -46,3 +56,4 @@ make delete
   - [KinD Installation](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
   - [Docker image registry - Kindest](https://hub.docker.com/u/kindest)
 - [bats-detik](https://github.com/bats-core/bats-detik)
+- [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)
