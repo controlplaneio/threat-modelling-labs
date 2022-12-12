@@ -18,7 +18,7 @@ kind: Pod
 metadata:
   name: nginx
   labels:
-      bats: privileged-test
+    bats: privileged-test
 spec:
   containers:
   - name: nginx

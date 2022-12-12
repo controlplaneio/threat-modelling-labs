@@ -3,14 +3,5 @@ apiVersion: kind.x-k8s.io/v1alpha4
 name: threat-modelling
 nodes:
 - role: control-plane
-  image: kindest/node:v1.21.1@sha256:f4eaad3d61dfe1228b43407dc9db980cd0a2e254588d133762750e605f5f368a
-  kubeadmConfigPatches:
-  - |
-    kind: ClusterConfiguration
-    apiServer:
-        extraArgs:
-          enable-admission-plugins: NodeRestriction
 - role: worker
-  image: kindest/node:v1.21.1@sha256:f4eaad3d61dfe1228b43407dc9db980cd0a2e254588d133762750e605f5f368a
-- role: worker
-  image: kindest/node:v1.21.1@sha256:f4eaad3d61dfe1228b43407dc9db980cd0a2e254588d133762750e605f5f368a
+  image: kindest/node:v1.25.2@sha256:f52781bc0d7a19fb6c405c2af83abfeb311f130707a0e219175677e366cc45d1
