@@ -4,7 +4,7 @@
 
 > Contents for the Threat Modelling workshop delivered by [Control Plane](https://control-plane.io).
 
-This lab can be run locally using the following inscructions. 
+This lab can be run locally using the following instructions. 
 
 ## Prerequisite
 
@@ -53,7 +53,7 @@ Deploy Gatekeeper to the cluster:
 ```bash
 make install-gatekeeper
 ```
-Enforcing policies using gatekeeper ammounts to creating Constraint Templates and Constraints. We will use [Konstraint](https://github.com/plexsystems/konstraint) in order to generate Constraint Templates and Constraints using the Rego source files as the source of trust (meaning that we do not have to update the Rego and the YAML independently). Observe the Rego that we will use to generate our privileged constraint:
+Enforcing policies using gatekeeper amounts to creating Constraint Templates and Constraints. We will use [Konstraint](https://github.com/plexsystems/konstraint) in order to generate Constraint Templates and Constraints using the Rego source files as the source of truth (meaning that we do not have to update the Rego and the YAML independently). Observe the Rego that we will use to generate our privileged constraint:
 ```bash
 cat source/policy/privileged/src.rego
 ```
@@ -75,7 +75,7 @@ make privileged-test
 
 ### Demo 2 - Enforcing and Testing Custom Policy
 
-We can now experiment with testing a custom policy. Imagine that we have derived a control from our threat model that demands that all production images are scanned, and promoted to a private registry as long as they pass a series of policy checks. We would now like to impose a constraint that only images pulled from this sepcific repository can be deployed as containers on our cluster. In order to mock up this scenario, we have provided a sample Golang application, which we can build and push to https://ttl.sh/ - a free anonymous and ephemeral image registry. Let's imagine that this is our private registry, and that our Golang app image has passed all required checks and can be pushed to this registry:
+We can now experiment with testing a custom policy. Imagine that we have derived a control from our threat model that demands that all production images are scanned, and promoted to a private registry as long as they pass a series of policy checks. We would now like to impose a constraint that only images pulled from this specific repository can be deployed as containers on our cluster. In order to mock up this scenario, we have provided a sample Golang application, which we can build and push to https://ttl.sh/ - a free anonymous and ephemeral image registry. Let's imagine that this is our private registry, and that our Golang app image has passed all required checks and can be pushed to this registry:
 ```bash
 make image-push
 ```
