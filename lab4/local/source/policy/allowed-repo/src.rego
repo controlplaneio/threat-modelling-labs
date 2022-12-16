@@ -18,7 +18,7 @@
 #       kinds:
 #       - Pod
 
-package allowed_image
+package allowed_repo
 
 satisfied(c_image) {
 	repo := input.parameters.repos[_]

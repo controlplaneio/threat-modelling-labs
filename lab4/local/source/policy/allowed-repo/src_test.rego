@@ -1,4 +1,4 @@
-package allowed_image
+package allowed_repo
 
 denied_input := {
 	"review": {
