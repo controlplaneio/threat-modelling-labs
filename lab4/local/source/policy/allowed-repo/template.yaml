@@ -1,0 +1,44 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  creationTimestamp: null
+  name: allowedrepo
+spec:
+  crd:
+    spec:
+      names:
+        kind: AllowedRepo
+      validation:
+        openAPIV3Schema:
+          properties:
+            repos:
+              description: Array of acceptable repos
+              items:
+                type: string
+              type: array
+  targets:
+  - rego: |-
+      package allowed_image
+
+      satisfied(c_image) {
+        repo := input.parameters.repos[_]
+        startswith(c_image, repo)
+      }
+
+      violation[{"msg": msg}] {
+        container := input.review.object.spec.containers[_]
+        not satisfied(container.image)
+        msg := sprintf("container <%v> has an invalid image repo <%v>, allowed repos are %v", [container.name, container.image, input.parameters.repos])
+      }
+      violation[{"msg": msg}] {
+        container := input.review.object.spec.initContainers[_]
+        not satisfied(container.image)
+        msg := sprintf("initContainer <%v> has an invalid image repo <%v>, allowed repos are %v", [container.name, container.image, input.parameters.repos])
+      }
+      violation[{"msg": msg}] {
+        container := input.review.object.spec.ephemeralContainers[_]
+        not satisfied(container.image)
+        msg := sprintf("ephemeralContainer <%v> has an invalid image repo <%v>, allowed repos are %v", [container.name, container.image, input.parameters.repos])
+      }
+    target: admission.k8s.gatekeeper.sh
+status: {}

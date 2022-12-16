@@ -1,0 +1,17 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: AllowedRepo
+metadata:
+  name: allowedrepo
+spec:
+  match:
+    excludedNamespaces:
+    - kube-system
+    - gatekeeper-system
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Pod
+  parameters:
+    repos:
+      - "ttl.sh/"

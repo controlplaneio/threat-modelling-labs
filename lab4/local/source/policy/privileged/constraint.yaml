@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: Privileged
+metadata:
+  name: privileged
+spec:
+  match:
+    excludedNamespaces:
+    - kube-system
+    - gatekeeper-system
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Pod

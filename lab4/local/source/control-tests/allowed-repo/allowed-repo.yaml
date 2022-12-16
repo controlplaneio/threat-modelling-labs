@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-go-allowed
+  labels:
+    bats: test
+spec:
+  containers:
+  - name: hello-go
+    image: ttl.sh/10757e04-3095-4e57-9793-17c2b7867a72:1h #replace with your image here 
+    ports:
+    - containerPort: 80
+    securityContext:
+      privileged: false
+    imagePullPolicy: Always
