@@ -14,6 +14,8 @@ IMAGE_NAME := $(shell uuidgen)
 delete:
 	kind delete cluster --name threat-modelling
 	rm -f config
+	find . -type d -exec chmod 755 {} \;
+	find . -type f -exec chmod 644 {} \;
 
 .PHONY: create
 create: delete
@@ -25,11 +27,13 @@ bats-detik-build:
 	rm -rf /tmp/bats-detik
 	git clone https://github.com/bats-core/bats-detik.git /tmp/bats-detik
 	(cd /tmp/bats-detik && git checkout e3ea96e14bfd8d2637fc827c1d801f4c576d2cfc)
+	(chmod 777 /tmp/bats-detik/lib/*)
 	(cd /tmp/bats-detik && docker build --build-arg KUBECTL_VERSION=${KUBECTL_VERSION} --build-arg HELM_VERSION=${HELM_VERSION} --build-arg BATS_VERSION=${BATS_VERSION} \-t bats-detik .)
 	rm -rf /tmp/bats-detik
 
 .PHONY: privileged-test
 privileged-test: bats-detik-build
+	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v ${PWD}/source:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
@@ -39,6 +43,7 @@ privileged-test: bats-detik-build
 
 .PHONY: repo-test
 repo-test: bats-detik-build
+	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v ${PWD}/source:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
@@ -48,6 +53,7 @@ repo-test: bats-detik-build
 
 PHONY: install-gatekeeper
 install-gatekeeper: bats-detik-build
+	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v ${PWD}/source:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
@@ -68,6 +74,7 @@ generate_constraint_templates:
 
 PHONY: deploy-privileged-constraint
 deploy-privileged-constraint: bats-detik-build
+	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v ${PWD}/source:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
@@ -78,6 +85,7 @@ deploy-privileged-constraint: bats-detik-build
 
 PHONY: deploy-repo-constraint
 deploy-repo-constraint: bats-detik-build
+	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v ${PWD}/source:/home/testing/source \
 		-v ${PWD}/config:/home/testing/.kube/config \
