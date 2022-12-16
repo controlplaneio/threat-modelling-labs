@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-go-forbidden
+  labels:
+    bats: test
+spec:
+  containers:
+  - name: hello-go
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    securityContext:
+      privileged: false

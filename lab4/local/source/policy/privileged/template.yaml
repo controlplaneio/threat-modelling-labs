@@ -1,0 +1,30 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  creationTimestamp: null
+  name: privileged
+spec:
+  crd:
+    spec:
+      names:
+        kind: Privileged
+  targets:
+  - rego: |-
+      package privileged_check
+
+      violation[{"msg": msg, "details": {}}] {
+          c := input_containers[_]
+          c.securityContext.privileged
+          msg := sprintf("Privileged container is not allowed: %v, securityContext: %v", [c.name, c.securityContext])
+      }
+      input_containers[c] {
+          c := input.review.object.spec.containers[_]
+      }
+      input_containers[c] {
+          c := input.review.object.spec.initContainers[_]
+      }
+      input_containers[c] {
+          c := input.review.object.spec.ephemeralContainers[_]
+      }
+    target: admission.k8s.gatekeeper.sh
+status: {}
