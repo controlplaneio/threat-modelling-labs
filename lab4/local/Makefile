@@ -1,7 +1,9 @@
 KUBECTL_VERSION := v1.25.2
 HELM_VERSION := v3.8.2
 BATS_VERSION := 1.8.2
+KIND_VERSION := v0.17.0
 
+GATEKEEPER_VERSION := 3.10.0
 OPA_VERSION := 0.47.3
 OPA_IMAGE := openpolicyagent/opa:$(OPA_VERSION)
 
@@ -16,6 +18,12 @@ delete:
 	rm -f config
 	find . -type d -exec chmod 755 {} \;
 	find . -type f -exec chmod 644 {} \;
+
+.PHONY: install-kind
+install-kind:
+	curl -Lo ${HOME}/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64
+	chmod +x ${HOME}/kind
+	sudo mv ${HOME}/kind /usr/local/bin/kind
 
 .PHONY: create
 create: delete
@@ -51,7 +59,7 @@ repo-test: bats-detik-build
 		bats-detik \
 		bats /home/testing/source/control-tests/allowed-repo/repo-test.bats		
 
-PHONY: install-gatekeeper
+.PHONY: install-gatekeeper
 install-gatekeeper: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
@@ -61,18 +69,18 @@ install-gatekeeper: bats-detik-build
 		bats-detik \
 		/bin/bash -c "helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts && \
 		helm install gatekeeper/gatekeeper  \
-		--version 3.10.0 \
-    --name-template=gatekeeper \
-    --namespace gatekeeper-system --create-namespace \
-    --set enableExternalData=true \
-    --set controllerManager.dnsPolicy=ClusterFirst,audit.dnsPolicy=ClusterFirst"
+		--version ${GATEKEEPER_VERSION} \
+		--name-template=gatekeeper \
+		--namespace gatekeeper-system --create-namespace \
+		--set enableExternalData=true \
+		--set controllerManager.dnsPolicy=ClusterFirst,audit.dnsPolicy=ClusterFirst"
 
 .PHONY: generate_constraint_templates
 generate_constraint_templates:
 	docker run --rm -w /src -v $(PWD):/src $(KONSTRAINT_IMAGE) \
 		create source/policy/
 
-PHONY: deploy-privileged-constraint
+.PHONY: deploy-privileged-constraint
 deploy-privileged-constraint: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
@@ -83,7 +91,7 @@ deploy-privileged-constraint: bats-detik-build
 		/bin/bash -c "kubectl apply -f /home/testing/source/policy/privileged/template.yaml && \
 		kubectl apply -f /home/testing/source/policy/privileged/constraint.yaml"
 
-PHONY: deploy-repo-constraint
+.PHONY: deploy-repo-constraint
 deploy-repo-constraint: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
