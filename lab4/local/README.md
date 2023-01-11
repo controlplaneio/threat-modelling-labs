@@ -12,13 +12,19 @@ This lab can be run locally using the following instructions.
 
 - [Make](https://www.gnu.org/software/make/manual/make.html)
 - [Docker](https://www.docker.com)
-- [KinD](https://kind.sigs.k8s.io/docs/user/quick-start/)
+- [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
 
 ## Demo
 
 ### Introduction and Setup
 
-Create a kind cluster which we will use for this lab:  
+If you have not yet installed kind, you can do so by running
+
+```bash
+make install-kind
+```
+
+Once it is installed, create a kind cluster which we will use for this lab:  
 
 ```bash
 make create
@@ -53,7 +59,7 @@ Deploy Gatekeeper to the cluster:
 ```bash
 make install-gatekeeper
 ```
-Enforcing policies using gatekeeper amounts to creating Constraint Templates and Constraints. We will use [Konstraint](https://github.com/plexsystems/konstraint) in order to generate Constraint Templates and Constraints using the Rego source files as the source of truth (meaning that we do not have to update the Rego and the YAML independently). Observe the Rego that we will use to generate our privileged constraint:
+Enforcing policies using Gatekeeper amounts to creating Constraint Templates and Constraints. We will use [Konstraint](https://github.com/plexsystems/konstraint) in order to generate Constraint Templates and Constraints using the Rego source files as the source of truth (meaning that we do not have to update the Rego and the YAML independently). Observe the Rego that we will use to generate our privileged constraint:
 ```bash
 cat source/policy/privileged/src.rego
 ```
@@ -120,8 +126,8 @@ make delete
 
 ## References
 
-- [KinD](https://kind.sigs.k8s.io/)
-  - [KinD Installation](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+- [kind](https://kind.sigs.k8s.io/)
+  - [kind Installation](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
   - [Docker image registry - Kindest](https://hub.docker.com/u/kindest)
 - [bats-detik](https://github.com/bats-core/bats-detik)
 - [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)

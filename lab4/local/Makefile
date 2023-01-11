@@ -21,9 +21,9 @@ delete:
 
 .PHONY: install-kind
 install-kind:
-	curl -Lo ${HOME}/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64
-	chmod +x ${HOME}/kind
-	sudo mv ${HOME}/kind /usr/local/bin/kind
+	curl -Lo "${HOME}"/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64
+	chmod +x "${HOME}"/kind
+	sudo mv "${HOME}"/kind /usr/local/bin/kind
 
 .PHONY: create
 create: delete
@@ -43,8 +43,8 @@ bats-detik-build:
 privileged-test: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
-		-v ${PWD}/source:/home/testing/source \
-		-v ${PWD}/config:/home/testing/.kube/config \
+		-v "${PWD}"/source:/home/testing/source \
+		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
 		bats /home/testing/source/control-tests/privileged/privileged-test.bats
@@ -53,8 +53,8 @@ privileged-test: bats-detik-build
 repo-test: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
-		-v ${PWD}/source:/home/testing/source \
-		-v ${PWD}/config:/home/testing/.kube/config \
+		-v "${PWD}"/source:/home/testing/source \
+		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
 		bats /home/testing/source/control-tests/allowed-repo/repo-test.bats		
@@ -63,8 +63,8 @@ repo-test: bats-detik-build
 install-gatekeeper: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
-		-v ${PWD}/source:/home/testing/source \
-		-v ${PWD}/config:/home/testing/.kube/config \
+		-v "${PWD}"/source:/home/testing/source \
+		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
 		/bin/bash -c "helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts && \
@@ -77,15 +77,15 @@ install-gatekeeper: bats-detik-build
 
 .PHONY: generate_constraint_templates
 generate_constraint_templates:
-	docker run --rm -w /src -v $(PWD):/src $(KONSTRAINT_IMAGE) \
+	docker run --rm -w /src -v "${PWD}":/src ${KONSTRAINT_IMAGE} \
 		create source/policy/
 
 .PHONY: deploy-privileged-constraint
 deploy-privileged-constraint: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
-		-v ${PWD}/source:/home/testing/source \
-		-v ${PWD}/config:/home/testing/.kube/config \
+		-v "${PWD}"/source:/home/testing/source \
+		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
 		/bin/bash -c "kubectl apply -f /home/testing/source/policy/privileged/template.yaml && \
@@ -95,8 +95,8 @@ deploy-privileged-constraint: bats-detik-build
 deploy-repo-constraint: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
-		-v ${PWD}/source:/home/testing/source \
-		-v ${PWD}/config:/home/testing/.kube/config \
+		-v "${PWD}"/source:/home/testing/source \
+		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
 		/bin/bash -c "kubectl apply -f /home/testing/source/policy/allowed-repo/template.yaml && \
@@ -104,7 +104,7 @@ deploy-repo-constraint: bats-detik-build
 
 .PHONY: opa_unit_tests
 opa_unit_tests:
-	docker run --rm -w /src -v $(PWD):/src $(OPA_IMAGE) \
+	docker run --rm -w /src -v "${PWD}":/src ${OPA_IMAGE} \
 		test source/policy/ -v --ignore *.yaml --ignore *.yml
 
 .PHONY: image-push
