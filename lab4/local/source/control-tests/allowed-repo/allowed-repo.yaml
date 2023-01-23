@@ -7,9 +7,12 @@ metadata:
 spec:
   containers:
   - name: hello-go
-    image: ttl.sh/70a0da41-348f-4c49-8fd7-d5ba87ba8066:1h #replace with your image here 
+    image: ttl.sh/0ce7e8a6-d7ec-4c2c-a94e-c9e2f3c2371a:1h #replace with your image here 
     ports:
     - containerPort: 80
     securityContext:
       privileged: false
+      capabilities:
+        drop:
+          - ALL
     imagePullPolicy: Always
