@@ -17,10 +17,10 @@ setup() {
 }
 
 @test "verify that privileged containers cannot be run in cluster" {
-  run kubectl apply -f source/control-tests/privileged/privileged.yaml
+	run kubectl apply -f source/control-tests/privileged/privileged.yaml
 	[ "$status" -gt 0 ]
 }
 
 teardown() {
-  kubectl delete pods -l bats=test   
+	kubectl delete pods -l bats=test   
 }
