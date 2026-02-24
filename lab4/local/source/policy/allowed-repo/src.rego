@@ -20,22 +20,24 @@
 
 package allowed_repo
 
-satisfied(c_image) {
+import rego.v1
+
+satisfied(c_image) if {
 	repo := input.parameters.repos[_]
 	startswith(c_image, repo)
 }
 
-violation[{"msg": msg}] {
+violation contains {"msg": msg} if {
 	container := input.review.object.spec.containers[_]
 	not satisfied(container.image)
 	msg := sprintf("container <%v> has an invalid image repo <%v>, allowed repos are %v", [container.name, container.image, input.parameters.repos])
 }
-violation[{"msg": msg}] {
+violation contains {"msg": msg} if {
 	container := input.review.object.spec.initContainers[_]
 	not satisfied(container.image)
 	msg := sprintf("initContainer <%v> has an invalid image repo <%v>, allowed repos are %v", [container.name, container.image, input.parameters.repos])
 }
-violation[{"msg": msg}] {
+violation contains {"msg": msg} if {
 	container := input.review.object.spec.ephemeralContainers[_]
 	not satisfied(container.image)
 	msg := sprintf("ephemeralContainer <%v> has an invalid image repo <%v>, allowed repos are %v", [container.name, container.image, input.parameters.repos])

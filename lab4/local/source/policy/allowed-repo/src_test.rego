@@ -1,5 +1,7 @@
 package allowed_repo
 
+import rego.v1
+
 denied_input := {
 	"review": {
 		"object": {
@@ -26,12 +28,12 @@ allowed_input := {
 	}
 }
 
-test_deny_non_allowed_repo {
+test_deny_non_allowed_repo if {
 	results := violation with input as denied_input
 	count(results) == 1
 }
 
-test_allow_allowed_repo {
+test_allow_allowed_repo if {
 	results := violation with input as allowed_input
 	count(results) == 0
 }
