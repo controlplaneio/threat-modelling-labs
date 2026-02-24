@@ -18,6 +18,7 @@ delete:
 	rm -f config
 	find . -type d -exec chmod 755 {} \;
 	find . -type f -exec chmod 644 {} \;
+	sed -i 's|image:.*|image: #paste your image here |g' source/control-tests/allowed-repo/allowed-repo.yaml
 
 .PHONY: install-kind
 install-kind:
