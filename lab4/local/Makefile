@@ -1,13 +1,13 @@
-KUBECTL_VERSION := v1.25.2
-HELM_VERSION := v3.8.2
-BATS_VERSION := 1.8.2
-KIND_VERSION := v0.17.0
+KUBECTL_VERSION := v1.35.0
+HELM_VERSION := v4.1.1
+BATS_VERSION := 1.13.0
+KIND_VERSION := v0.31.0
 
-GATEKEEPER_VERSION := 3.10.0
-OPA_VERSION := 0.47.3
+GATEKEEPER_VERSION := 3.21.1
+OPA_VERSION := 1.10.0
 OPA_IMAGE := openpolicyagent/opa:$(OPA_VERSION)
 
-KONSTRAINT_VERSION := v0.24.0
+KONSTRAINT_VERSION := v0.43.0
 KONSTRAINT_IMAGE := ghcr.io/plexsystems/konstraint:$(KONSTRAINT_VERSION)
 
 IMAGE_NAME := $(shell uuidgen)
@@ -34,15 +34,16 @@ create: delete
 bats-detik-build:
 	rm -rf /tmp/bats-detik
 	git clone https://github.com/bats-core/bats-detik.git /tmp/bats-detik
-	(cd /tmp/bats-detik && git checkout e3ea96e14bfd8d2637fc827c1d801f4c576d2cfc)
+	(cd /tmp/bats-detik && git checkout ce86871d7fdaed7f31b0e11e228b7b91a58ac1cc)
 	(chmod 777 /tmp/bats-detik/lib/*)
+	(cd /tmp/bats-detik && sed -i 's|storage.googleapis.com/kubernetes-release|dl.k8s.io|g' Dockerfile)
 	(cd /tmp/bats-detik && docker build --build-arg KUBECTL_VERSION=${KUBECTL_VERSION} --build-arg HELM_VERSION=${HELM_VERSION} --build-arg BATS_VERSION=${BATS_VERSION} \-t bats-detik .)
 	rm -rf /tmp/bats-detik
 
 .PHONY: privileged-test
 privileged-test: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
-	docker run -it \
+	-docker run -it \
 		-v "${PWD}"/source:/home/testing/source \
 		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
@@ -68,9 +69,8 @@ install-gatekeeper: bats-detik-build
 		--network="host" \
 		bats-detik \
 		/bin/bash -c "helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts && \
-		helm install gatekeeper/gatekeeper  \
+		helm upgrade --install gatekeeper gatekeeper/gatekeeper \
 		--version ${GATEKEEPER_VERSION} \
-		--name-template=gatekeeper \
 		--namespace gatekeeper-system --create-namespace \
 		--set enableExternalData=true \
 		--set controllerManager.dnsPolicy=ClusterFirst,audit.dnsPolicy=ClusterFirst"
