@@ -6,7 +6,7 @@ load "/home/testing/lib/detik"
 DETIK_CLIENT_NAME="kubectl"
 
 setup() {
-	run verify "there are 1 service named 'kubernetes'"
+	run verify "there is 1 service named 'kubernetes'"
 	[ "$status" -eq 0 ]
 }
 
