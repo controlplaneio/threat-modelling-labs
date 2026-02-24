@@ -80,6 +80,12 @@ install-gatekeeper: bats-detik-build
 generate_constraint_templates:
 	docker run --rm -w /src -v "${PWD}":/src ${KONSTRAINT_IMAGE} \
 		create source/policy/
+	sed -i 's/v1beta1/v1/g' source/policy/privileged/template.yaml
+	sed -i 's/v1beta1/v1/g' source/policy/allowed-repo/template.yaml
+	sed -i '/import rego.v1/d' source/policy/privileged/template.yaml
+	sed -i '/import rego.v1/d' source/policy/allowed-repo/template.yaml
+	awk '/^  - rego: \|-/ { print "  - code:\n    - engine: Rego\n      source:\n        version: v1\n        rego: |-"; in_rego=1; next } /^    target:/ { in_rego=0 } in_rego { print "    " $$0; next } { print $$0 }' source/policy/privileged/template.yaml > temp_priv.yaml && mv temp_priv.yaml source/policy/privileged/template.yaml
+	awk '/^  - rego: \|-/ { print "  - code:\n    - engine: Rego\n      source:\n        version: v1\n        rego: |-"; in_rego=1; next } /^    target:/ { in_rego=0 } in_rego { print "    " $$0; next } { print $$0 }' source/policy/allowed-repo/template.yaml > temp_repo.yaml && mv temp_repo.yaml source/policy/allowed-repo/template.yaml
 
 .PHONY: deploy-privileged-constraint
 deploy-privileged-constraint: bats-detik-build

@@ -14,17 +14,19 @@
 
 package privileged_check
 
-violation[{"msg": msg, "details": {}}] {
+import rego.v1
+
+violation contains {"msg": msg, "details": {}} if {
 		c := input_containers[_]
-		c.securityContext.privileged
+		c.securityContext.privileged == true
 		msg := sprintf("Privileged container is not allowed: %v, securityContext: %v", [c.name, c.securityContext])
 }
-input_containers[c] {
+input_containers contains c if {
 		c := input.review.object.spec.containers[_]
 }
-input_containers[c] {
+input_containers contains c if {
 		c := input.review.object.spec.initContainers[_]
 }
-input_containers[c] {
+input_containers contains c if {
 		c := input.review.object.spec.ephemeralContainers[_]
 }
