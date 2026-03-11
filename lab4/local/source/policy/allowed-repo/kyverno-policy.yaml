@@ -1,0 +1,30 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: allowed-image-repos
+spec:
+  validationFailureAction: Enforce
+  background: false
+  rules:
+    - name: validate-registries
+      match:
+        any:
+        - resources:
+            kinds:
+              - Pod
+      exclude:
+        any:
+        - resources:
+            namespaces:
+              - kube-system
+              - kyverno
+      validate:
+        message: "Images may only be pulled from allowed registries (ttl.sh/)."
+        pattern:
+          spec:
+            =(ephemeralContainers):
+              - image: "ttl.sh/*"
+            =(initContainers):
+              - image: "ttl.sh/*"
+            containers:
+              - image: "ttl.sh/*"
