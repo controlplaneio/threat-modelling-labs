@@ -2,13 +2,7 @@ KUBECTL_VERSION := v1.35.0
 HELM_VERSION := v4.1.1
 BATS_VERSION := 1.13.0
 KIND_VERSION := v0.31.0
-
-GATEKEEPER_VERSION := 3.21.1
-OPA_VERSION := 1.10.0
-OPA_IMAGE := openpolicyagent/opa:$(OPA_VERSION)
-
-KONSTRAINT_VERSION := v0.43.0
-KONSTRAINT_IMAGE := ghcr.io/plexsystems/konstraint:$(KONSTRAINT_VERSION)
+KYVERNO_VERSION := v1.17.1
 
 IMAGE_NAME := $(shell uuidgen)
 
@@ -61,58 +55,37 @@ repo-test: bats-detik-build
 		bats-detik \
 		bats /home/testing/source/control-tests/allowed-repo/repo-test.bats		
 
-.PHONY: install-gatekeeper
-install-gatekeeper: bats-detik-build
+.PHONY: install-kyverno
+install-kyverno: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v "${PWD}"/source:/home/testing/source \
 		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
-		/bin/bash -c "helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts && \
-		helm upgrade --install gatekeeper gatekeeper/gatekeeper \
-		--version ${GATEKEEPER_VERSION} \
-		--namespace gatekeeper-system --create-namespace \
-		--set enableExternalData=true \
-		--set controllerManager.dnsPolicy=ClusterFirst,audit.dnsPolicy=ClusterFirst"
+		/bin/bash -c "helm repo add kyverno https://kyverno.github.io/kyverno/ && \
+		helm upgrade --install kyverno kyverno/kyverno \
+		-n kyverno --create-namespace"
 
-.PHONY: generate_constraint_templates
-generate_constraint_templates:
-	docker run --rm -w /src -v "${PWD}":/src ${KONSTRAINT_IMAGE} \
-		create source/policy/
-	sed -i 's/v1beta1/v1/g' source/policy/privileged/template.yaml
-	sed -i 's/v1beta1/v1/g' source/policy/allowed-repo/template.yaml
-	sed -i '/import rego.v1/d' source/policy/privileged/template.yaml
-	sed -i '/import rego.v1/d' source/policy/allowed-repo/template.yaml
-	awk '/^  - rego: \|-/ { print "  - code:\n    - engine: Rego\n      source:\n        version: v1\n        rego: |-"; in_rego=1; next } /^    target:/ { in_rego=0 } in_rego { print "    " $$0; next } { print $$0 }' source/policy/privileged/template.yaml > temp_priv.yaml && mv temp_priv.yaml source/policy/privileged/template.yaml
-	awk '/^  - rego: \|-/ { print "  - code:\n    - engine: Rego\n      source:\n        version: v1\n        rego: |-"; in_rego=1; next } /^    target:/ { in_rego=0 } in_rego { print "    " $$0; next } { print $$0 }' source/policy/allowed-repo/template.yaml > temp_repo.yaml && mv temp_repo.yaml source/policy/allowed-repo/template.yaml
-
-.PHONY: deploy-privileged-constraint
-deploy-privileged-constraint: bats-detik-build
+.PHONY: deploy-privileged-policy
+deploy-privileged-policy: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v "${PWD}"/source:/home/testing/source \
 		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
-		/bin/bash -c "kubectl apply -f /home/testing/source/policy/privileged/template.yaml && \
-		kubectl apply -f /home/testing/source/policy/privileged/constraint.yaml"
+		/bin/bash -c "kubectl apply -f /home/testing/source/policy/privileged/kyverno-policy.yaml"
 
-.PHONY: deploy-repo-constraint
-deploy-repo-constraint: bats-detik-build
+.PHONY: deploy-repo-policy
+deploy-repo-policy: bats-detik-build
 	chmod 777 ./config && chmod -R 777 ./source 
 	docker run -it \
 		-v "${PWD}"/source:/home/testing/source \
 		-v "${PWD}"/config:/home/testing/.kube/config \
 		--network="host" \
 		bats-detik \
-		/bin/bash -c "kubectl apply -f /home/testing/source/policy/allowed-repo/template.yaml && \
-		kubectl apply -f /home/testing/source/policy/allowed-repo/constraint.yaml"
-
-.PHONY: opa_unit_tests
-opa_unit_tests:
-	docker run --rm -w /src -v "${PWD}":/src ${OPA_IMAGE} \
-		test source/policy/ -v --ignore *.yaml --ignore *.yml
+		/bin/bash -c "kubectl apply -f /home/testing/source/policy/allowed-repo/kyverno-policy.yaml"
 
 .PHONY: image-push
 image-push:
