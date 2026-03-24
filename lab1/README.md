@@ -8,7 +8,10 @@ This lab can be completed in one of the following three ways.
 
 > We recommend [Google Sheets](#google-sheets) as you can use it as a base for future work
 
-- [Google Sheets](#google-sheets) (Google account required)
+- [Google Sheets](#google-sheets)
+   - You can "Make a copy" to clone the document to your personal Google Drive account (Google Account Required)
+   - or
+   - You can download the document and open it in your preferred spreadsheet application
 - [PDF](#pdf) (printer required)
 - [Browser](#browser) (least interactive approach)
 
@@ -18,6 +21,13 @@ This lab can be completed in one of the following three ways.
 - Click to view the [Google Sheet](https://docs.google.com/spreadsheets/d/1V3HvoqMOK763asDTPZYpT1wn-f0zZ18CjYf15GTKrqA/edit?usp=sharing)
 - Create a copy in your Google Drive account by clicking `File` > `Make a copy`
 - Update missing cells on your cloned Sheet
+
+Or
+
+- File -> Download as -> Excel
+- Open the downloaded Excel file
+- Work through the worksheet locally or via Office365 Online
+
 
 ### PDF
 
