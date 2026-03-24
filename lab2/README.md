@@ -16,6 +16,12 @@ This lab can be completed in one of the following two ways:
 - Create a copy in your Google Drive account by clicking `File` > `Make a copy`
 - STRIDE on your Google Sheet
 
+Or
+
+- File -> Download as -> Excel
+- Open the downloaded Excel file
+- Work through the worksheet locally or via Office365 Online
+
 ### Pen and Paper
 
 - Use a pen and paper to create a template similar to [STRIDE template table](STRIDE.pdf)
